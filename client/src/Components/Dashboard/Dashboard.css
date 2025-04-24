@@ -1,0 +1,79 @@
+:root {
+    --primary-bg: #2a5298;
+    --navbar-bg: #5d94f3;
+    --font-color: white;
+    --gap-sm: 3vh;
+    --padding-sm: 2vh 0;
+    --padding-lg: 2vh 2vw;
+  }
+  
+  /* Main layout container */
+  .main-ui {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  /* Sidebar */
+  .left-ui {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 8%;
+    background-color: var(--primary-bg);
+    color: var(--font-color);
+    font-size: 1.2vw;
+    gap: var(--gap-sm);
+    padding: var(--padding-sm);
+  }
+  
+  /* Style for navigation links */
+  .left-ui a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--font-color);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .left-ui a:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Main content area */
+  .right-ui {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 100%;
+  }
+  
+  /* Top navigation bar */
+  .right-ui-navbar {
+    display: flex;
+    align-items: center;
+    height: 15%;
+    width: 100%;
+    background-color: var(--navbar-bg);
+    padding: var(--padding-lg);
+  }
+  
+  .right-ui-navbar span {
+    color: var(--font-color);
+    font-size: 1.1vw;
+  }
+  
+  /* Map or main content area */
+  .right-ui-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 85%;
+    width: 100%;
+    padding: 1vh;
+  }
+  

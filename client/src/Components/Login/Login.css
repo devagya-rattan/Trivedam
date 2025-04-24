@@ -1,0 +1,59 @@
+.Login-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+.Login-image {
+    width: 88vw;
+    height: 100%;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.Login-form {
+    width: 50vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding: 5vh 5vw;
+    font-size: 2vh;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.Login-form form {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 4vh;
+}
+
+.Login-form form input {
+    width: 100%;
+    height: 4vh;
+    border-radius: 7px;
+    padding: 0 1vw;
+}
+.Login-form form button{
+   width: 100%;
+   height: 4vh;
+   font-size: 2vh;
+   font-weight: 500;
+   background-color: #2a5298;
+   color: white;
+   border: none;
+   cursor: pointer;
+}
