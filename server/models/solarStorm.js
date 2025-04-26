@@ -5,6 +5,9 @@ const Storm = sequelize.define('Storm', {
     storm: {
         type: DataTypes.BOOLEAN,
     },
+    timeStorm:{
+        type: DataTypes.INTEGER,
+    }
 }, {
     tableName: "storm", // 👈 THIS LINE FIXES THE ISSUE
 }

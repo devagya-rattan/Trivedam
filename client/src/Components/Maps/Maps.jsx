@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -18,7 +18,75 @@ const MapUpdater = ({ position }) => {
     return null;
 };
 
-const Maps = () => {
+const SolarFlareEffect = ({ center, storm }) => {
+    const map = useMap();
+    const radiusRef = useRef(0);
+    const circleRef = useRef(null);
+
+    const maxRadius = 2000000;
+    const growSpeed = 20;
+    const step = 50000;
+
+    useEffect(() => {
+        if (!map || !storm) return;
+
+        radiusRef.current = 0;
+
+        if (circleRef.current) {
+            map.removeLayer(circleRef.current);
+        }
+
+        circleRef.current = L.circle(center, {
+            radius: 0,
+            color: 'red',
+            fillColor: 'red',
+            opacity: 0.8,
+            fillOpacity: 0.4,
+            weight: 2,
+        }).addTo(map);
+
+        let fading = false;
+
+        const interval = setInterval(() => {
+            if (!circleRef.current) return;
+
+            radiusRef.current += step;
+
+            if (radiusRef.current >= maxRadius) {
+                fading = true;
+            }
+
+            if (fading) {
+                let currentOpacity = circleRef.current.options.opacity;
+                let newOpacity = currentOpacity - 0.05;
+
+                if (newOpacity <= 0) {
+                    map.removeLayer(circleRef.current);
+                    clearInterval(interval);
+                } else {
+                    circleRef.current.setStyle({
+                        opacity: newOpacity,
+                        fillOpacity: newOpacity * 0.5,
+                    });
+                }
+            } else {
+                circleRef.current.setRadius(radiusRef.current);
+            }
+        }, growSpeed);
+
+        return () => {
+            clearInterval(interval);
+            if (circleRef.current) {
+                map.removeLayer(circleRef.current);
+                circleRef.current = null;
+            }
+        };
+    }, [map, center, storm]);
+
+    return null;
+};
+
+const Maps = ({ storm }) => {
     const [satellitePosition, setSatellitePosition] = useState({
         latitude: 33.2778,
         longitude: 75.3412
@@ -103,6 +171,7 @@ const Maps = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <MapUpdater position={position} />
+                <SolarFlareEffect center={position} storm={storm} />
                 <Marker position={position} icon={customIcon}>
                     <Popup>
                         <strong>Trivedam-1 Satellite</strong><br />
